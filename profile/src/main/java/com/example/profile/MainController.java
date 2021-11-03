@@ -1,7 +1,6 @@
 package com.example.profile;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,14 +13,14 @@ public class MainController {
     private PeopleRepository peopleRepository;
 
     @PostMapping(path="/add") // Map ONLY POST Requests
-    public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String address, @RequestParam String description) {
+    public @ResponseBody String addNewUser(@RequestBody People p) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
         People people = new People();
 //        people.setId(id);
-        people.setName(name);
-        people.setAddress(address);
-        people.setDescription(description);
+        people.setName(p.name);
+        people.setAddress(p.address);
+        people.setDescription(p.description);
         peopleRepository.save(people);
         return "Saved";
     }
