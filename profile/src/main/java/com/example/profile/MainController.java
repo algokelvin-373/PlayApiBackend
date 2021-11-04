@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+/*
+Reference: https://www.javatpoint.com/spring-boot-crud-operations
+ */
+
 @Controller
 @RequestMapping(path="/demo")
 public class MainController {
@@ -41,6 +45,12 @@ public class MainController {
     @PostMapping(path = "/delete")
     public @ResponseBody void deleteUserById(@RequestParam int id) {
         peopleRepository.deleteById(id);
+    }
+
+    @PutMapping(path = "/update/{id}")
+    public @ResponseBody String updateUser(@PathVariable int id, @RequestBody People p) {
+        peopleRepository.updateUserById(p.name, p.address, p.description, id);
+        return "Success Edit";
     }
 
 }
