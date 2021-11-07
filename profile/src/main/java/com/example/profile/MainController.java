@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 /*
-Reference: https://www.javatpoint.com/spring-boot-crud-operations
+Reference:
+https://www.javatpoint.com/spring-boot-crud-operations
+https://self-learning-java-tutorial.blogspot.com/2021/04/spring-data-jpa-update-entity-using.html
  */
 
 @Controller
