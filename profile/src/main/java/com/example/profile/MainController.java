@@ -1,6 +1,8 @@
 package com.example.profile;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +21,7 @@ public class MainController {
     private PeopleRepository peopleRepository;
 
     @PostMapping(path="/add") // Map ONLY POST Requests
-    public @ResponseBody String addNewUser(@RequestBody People p) {
+    public @ResponseBody Optional<People> addNewUser(@RequestBody People p) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
         People people = new People();
@@ -28,7 +30,7 @@ public class MainController {
         people.setAddress(p.address);
         people.setDescription(p.description);
         peopleRepository.save(people);
-        return "Saved";
+        return peopleRepository.findById(people.id);
     }
 
     @GetMapping(path="/all")
@@ -39,9 +41,20 @@ public class MainController {
     }
 
     @GetMapping(path = "/profile/{id}")
-    public @ResponseBody
-    Optional<People> getUserById(@PathVariable int id) {
-        return peopleRepository.findById(id);
+    @ResponseBody
+    public ResponseEntity<ResponseData> getUserById(@PathVariable int id) {
+        ResponseData responseData = new ResponseData();
+        Optional<People> people = peopleRepository.findById(id);
+        System.out.println(people);
+        if (people.isEmpty()) {
+            responseData.setMessage("Data User Not Found");
+            responseData.setStatus(false);
+        } else {
+            responseData.setMessage("Data User is Founded");
+            responseData.setStatus(true);
+        }
+        responseData.setResponse_data(people);
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
 
     @PostMapping(path = "/delete")
@@ -50,9 +63,9 @@ public class MainController {
     }
 
     @PutMapping(path = "/update/{id}")
-    public @ResponseBody String updateUser(@PathVariable int id, @RequestBody People p) {
+    public @ResponseBody Optional<People> updateUser(@PathVariable int id, @RequestBody People p) {
         peopleRepository.updateUserById(p.name, p.address, p.description, id);
-        return "Success Edit";
+        return peopleRepository.findById(id);
     }
 
 }
