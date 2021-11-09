@@ -1,6 +1,7 @@
 package com.example.profile;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,17 @@ public class MainController {
     Iterable<People> getAllUsers() {
         // This returns a JSON or XML with the users
         return peopleRepository.findAll();
+    }
+
+    @GetMapping(path="/allheader")
+    @ResponseBody
+    public ResponseEntity<Iterable<People>> getAllUsersWithHeader(@RequestHeader("token") String header) {
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("token", header);
+
+        return ResponseEntity.ok()
+                .headers(responseHeaders)
+                .body(peopleRepository.findAll());
     }
 
     @GetMapping(path = "/profile/{id}")
