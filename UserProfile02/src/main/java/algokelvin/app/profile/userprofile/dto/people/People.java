@@ -1,4 +1,4 @@
-package algokelvin.app.profile.userprofile.dto;
+package algokelvin.app.profile.userprofile.dto.people;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
