@@ -13,9 +13,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping(path = "/api/profile", produces = MediaType.APPLICATION_JSON_VALUE)
 @Validated
-@Api(tags = "Configuration")
+@Api(tags = "User Profile")
 @Slf4j
 public class PeopleController {
 
