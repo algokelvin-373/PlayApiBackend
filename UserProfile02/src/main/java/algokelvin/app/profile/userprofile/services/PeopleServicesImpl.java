@@ -33,6 +33,7 @@ public class PeopleServicesImpl implements PeopleServices {
             e.printStackTrace();
             throw new CustomException("Invalid Error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        LOG.info("Success Response => "+ people);
 
         return RspPeople.builder()
                 .name(people.getName())
