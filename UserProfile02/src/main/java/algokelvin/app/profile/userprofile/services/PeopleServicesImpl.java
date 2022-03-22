@@ -41,4 +41,9 @@ public class PeopleServicesImpl implements PeopleServices {
                 .description(people.getDescription())
                 .build();
     }
+
+    @Override
+    public Iterable<People> getAllProfile() {
+        return peopleRepository.findAll();
+    }
 }
