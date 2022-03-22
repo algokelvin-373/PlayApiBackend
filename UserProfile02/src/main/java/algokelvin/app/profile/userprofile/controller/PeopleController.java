@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 @Api(tags = "User Profile")
 @Slf4j
-public class PeopleControllerImpl {
+public class PeopleController {
 
     @Autowired
     PeopleServices peopleServices;
