@@ -1,11 +1,10 @@
 package algokelvin.app.userhobbies;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import static org.springframework.boot.SpringApplication.run;
 
 @SpringBootApplication
 @EnableScheduling
@@ -13,7 +12,7 @@ import static org.springframework.boot.SpringApplication.run;
 public class UserhobbiesApplication {
 
 	public static void main(String[] args) {
-		run(UserhobbiesApplication.class, args);
+		SpringApplication.run(UserhobbiesApplication.class, args);
 	}
 
 	@GetMapping("/")

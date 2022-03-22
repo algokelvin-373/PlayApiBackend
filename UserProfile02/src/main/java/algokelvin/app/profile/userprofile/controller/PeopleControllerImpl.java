@@ -13,14 +13,14 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping(path = "/api/profile", produces = MediaType.APPLICATION_JSON_VALUE)
 @Validated
-@Api(tags = "Configuration")
+@Api(tags = "User Profile")
 @Slf4j
-public class PeopleController {
+public class PeopleControllerImpl {
 
     @Autowired
-    private PeopleServices peopleServices;
+    PeopleServices peopleServices;
 
     @GetMapping(value = "detail", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiResponses(value = {
@@ -29,6 +29,16 @@ public class PeopleController {
         return new GlobalApiResponse<>(
                 HttpStatus.OK.value(),
                 peopleServices.getProfile(id)
+        );
+    }
+
+    @GetMapping(value = "all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "successful operation", response = GlobalApiResponse.class)
+    }) public GlobalApiResponse<?> getAllDataProfile() {
+        return new GlobalApiResponse<>(
+                HttpStatus.OK.value(),
+                peopleServices.getAllProfile()
         );
     }
 
