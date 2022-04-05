@@ -80,4 +80,14 @@ public class MainController {
         return peopleRepository.findById(id);
     }
 
+    @RequestMapping(path = "/profilejson", method = RequestMethod.GET,
+            consumes = "application/json")
+    public @ResponseBody String getProfilesJson(@RequestBody User user) {
+        System.out.println("Run with application/json");
+        System.out.println("Name       : "+user.getName());
+        System.out.println("Decription : "+user.getDescription());
+        String msg = "Success Run with application/json";
+        return msg;
+    }
+
 }
