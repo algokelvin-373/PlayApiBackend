@@ -3,8 +3,10 @@ package com.example.profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -80,14 +82,18 @@ public class MainController {
         return peopleRepository.findById(id);
     }
 
-    @RequestMapping(path = "/profilejson", method = RequestMethod.GET,
-            consumes = "application/json")
+    @RequestMapping(path = "/profilejson", method = RequestMethod.GET, consumes = "application/json")
     public @ResponseBody String getProfilesJson(@RequestBody User user) {
         System.out.println("Run with application/json");
         System.out.println("Name       : "+user.getName());
         System.out.println("Decription : "+user.getDescription());
         String msg = "Success Run with application/json";
         return msg;
+    }
+
+    @PostMapping(path = "/profileurlencoded", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public @ResponseBody String getProfilesUrlencoded(String user) {
+        return "User" + user + "Success Run with application/x-www-form-urlencoded";
     }
 
 }
