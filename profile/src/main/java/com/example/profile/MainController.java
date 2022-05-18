@@ -96,4 +96,9 @@ public class MainController {
         return "User" + user + "Success Run with application/x-www-form-urlencoded";
     }
 
+    @RequestMapping(path = "/profileurlencoded2", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public @ResponseBody String getProfilesUrlencoded2(String user) {
+        return "User" + user + "Success Run with application/x-www-form-urlencoded version 2";
+    }
+
 }
