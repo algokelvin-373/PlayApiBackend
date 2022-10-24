@@ -1,0 +1,8 @@
+>> The Point 1
+Choose one coding language which you want to learn. Do it and focus. Don't be many ask. Many the beginners always ask, "Which the coding language the first learn?". Well, this is make you never to action to learn that.
+
+>> The Point 2
+Well, you have done the point 1. Then, learn to understand the fundamental. For example: Input/Output, Decision, Looping, Array, Methods, etc. I will share my article in this comments (using Indonesian Language)
+
+>> The Point 3
+Okay, you have done the point 2. But, don't be satisfied. You should be many challenge. For example: Create Calculator, Show The Modelling of Rectangle (using '*'), etc. This is the best step to training you challenge.
