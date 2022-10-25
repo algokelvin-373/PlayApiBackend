@@ -4,22 +4,37 @@ const requestListener = (request, response) => {
     response.setHeader('Content-type', 'text/html')
     response.statusCode = 200
 
-    const { method } = request
+    const { method, url } = request
 
-    if (method === 'GET') {
-        response.end('<h1>Hello</h1>')
-    }
-    if(method === 'POST') {
-        let body = []
-
-        request.on('data', (chunk) => {
-            body.push(chunk)
-        })
-        request.on('end', () => {
-            body = Buffer.concat(body).toString();
-            const { name } = JSON.parse(body)
-            response.end(`<h1>Hai, ${name}!</h1>`);
-        })
+    if (url === '/') {
+        if (method === 'GET') {
+            response.end('<p>Server is running</p>')
+        } else {
+            response.statusCode = 400
+            response.end(`This page cannot access`)
+        }
+    } else if (url === '/about') {
+        if (method === 'GET') {
+            response.end('<h1>Hello, Welcome</h1>')
+        }
+        else if(method === 'POST') {
+            let body = []
+    
+            request.on('data', (chunk) => {
+                body.push(chunk)
+            })
+            request.on('end', () => {
+                body = Buffer.concat(body).toString();
+                const { name } = JSON.parse(body)
+                response.end(`<h1>Hai, ${name}!</h1>`);
+            })
+        } else {
+            response.statusCode = 400
+            response.end(`This page cannot access`)
+        }
+    } else {
+        response.statusCode = 404
+        response.end('<p>Not Found</p>')
     }
     
 }
