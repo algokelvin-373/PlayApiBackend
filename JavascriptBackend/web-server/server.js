@@ -1,21 +1,29 @@
 const http = require('http')
 
 const requestListener = (request, response) => {
-    response.setHeader('Content-type', 'text/html')
+    response.setHeader('Content-type', 'application/json')
     response.statusCode = 200
 
     const { method, url } = request
 
     if (url === '/') {
         if (method === 'GET') {
-            response.end('<p>Server is running</p>')
+            response.end(JSON.stringify({
+                message: 'Server is running',
+                code: 200
+            }))
         } else {
-            response.statusCode = 400
-            response.end(`This page cannot access`)
+            response.end(JSON.stringify({
+                message: 'This page cannot access',
+                code: 400
+            }))
         }
     } else if (url === '/about') {
         if (method === 'GET') {
-            response.end('<h1>Hello, Welcome</h1>')
+            response.end(JSON.stringify({
+                message: 'Hello, Welcome',
+                code: 200
+            }))
         }
         else if(method === 'POST') {
             let body = []
@@ -26,15 +34,22 @@ const requestListener = (request, response) => {
             request.on('end', () => {
                 body = Buffer.concat(body).toString();
                 const { name } = JSON.parse(body)
-                response.end(`<h1>Hai, ${name}!</h1>`);
+                response.end(JSON.stringify({
+                    message: `Hai, ${name}!`,
+                    code: 200
+                }))
             })
         } else {
-            response.statusCode = 400
-            response.end(`This page cannot access`)
+            response.end(JSON.stringify({
+                message: 'This page cannot access',
+                code: 400
+            }))
         }
     } else {
-        response.statusCode = 404
-        response.end('<p>Not Found</p>')
+        response.end(JSON.stringify({
+            message: 'Not found',
+            code: 404
+        }))
     }
     
 }
