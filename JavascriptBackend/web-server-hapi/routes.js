@@ -3,7 +3,31 @@ const routes = [
         method: 'GET',
         path: '/',
         handler: (request, h) => {
-            return '<h3>Welcome Kelvin</h3>'
+            return '<h3>Welcome</h3>'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/users/{username}',
+        handler: (request, h) => {
+            const {username} = request.params
+            return `<h3>Hello, ${username}. Welcome in my page </h3>`
+        }
+    },
+    {
+        method: 'GET',
+        path: '/class',
+        handler: (request, h) => {
+            const {level, type} = request.query
+            return `Search: ${level} - ${type}`
+        }
+    },
+    {
+        method: 'POST',
+        path: '/login',
+        handler: (request, h) => {
+            const {username, password} = request.payload
+            return `Welcome, ${username}`
         }
     },
     {
@@ -17,7 +41,7 @@ const routes = [
         method: 'GET',
         path: '/about',
         handler: (request, h) => {
-            return '<p>This is My Page, Kelvin</p>'
+            return '<p>This is My Page</p>'
         }
     },
     {
